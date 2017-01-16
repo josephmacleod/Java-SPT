@@ -42,7 +42,7 @@ public class StoreSPT{
       }
       System.out.println(date_time);
       String sql = "INSERT INTO spt (date_time, Hs, Tz, Battery)" +
-        " VALUES (" + sdf.format(date_time) + ", "  + dataSPT.hs + ", " + dataSPT.tz + ", " + dataSPT.battery + ")";
+        " VALUES ('" + sdf.format(date_time) + "', "  + dataSPT.hs + ", " + dataSPT.tz + ", " + dataSPT.battery + ")";
       System.out.println(sql);
       stmt.executeUpdate(sql);
     } catch (SQLException e) {
@@ -50,7 +50,4 @@ public class StoreSPT{
     }
   }
 
-  
-  
-  
 }
