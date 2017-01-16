@@ -18,7 +18,6 @@ public class StoreSPT{
       Class.forName("com.mysql.jdbc.Driver");
       System.out.println("JDBC driver successfully loaded!");
       connection = DriverManager.getConnection(url, username, password);
-      //query = "insert into spt values("")";
   
     } catch (ClassNotFoundException e) {
       throw new RuntimeException(e);
@@ -30,7 +29,7 @@ public class StoreSPT{
   public void writeRecord(DataSPT dataSPT){
     try {
       stmt = connection.createStatement();
-      System.out.println(dataSPT.datetime);
+      System.out.println(dataSPT.datetime + " was added to the spt table.");
       SimpleDateFormat date_formater = new SimpleDateFormat("yyyy-MM-dd'T'hh'h'mm");
       SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
@@ -38,12 +37,12 @@ public class StoreSPT{
       try {
         date_time = date_formater.parse(dataSPT.datetime);
       } catch (java.text.ParseException e) {
-        System.out.println(e.toString());
+        
       }
-      System.out.println(date_time);
+      
       String sql = "INSERT INTO spt (date_time, Hs, Tz, Battery)" +
         " VALUES ('" + sdf.format(date_time) + "', "  + dataSPT.hs + ", " + dataSPT.tz + ", " + dataSPT.battery + ")";
-      System.out.println(sql);
+      
       stmt.executeUpdate(sql);
     } catch (SQLException e) {
       System.out.println(e.toString());
