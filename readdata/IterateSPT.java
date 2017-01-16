@@ -16,12 +16,11 @@ public class IterateSPT {
     
     for (File file : listOfFiles) {
       if (file.isFile()) {
-        //System.out.println(file.getPath());
         ReadSPT spt_data = new ReadSPT(file.getPath());
         String[] file_data = spt_data.OpenFile();
-        DataSPT dataSPT = new DataSPT(file_data);
-        //System.out.println(dataSPT.Battery);
+        DataSPT dataSPT = new DataSPT(file_data, file.getPath());
         storeSPT.writeRecord(dataSPT);
+        
       } 
       
     };
