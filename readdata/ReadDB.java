@@ -1,7 +1,13 @@
 package readdata;
 
-import java.io.IOException;
+import java.io.*;
 import java.sql.*;
+import java.util.*;
+import org.jfree.chart.JFreeChart; 
+import org.jfree.chart.ChartFactory; 
+import org.jfree.chart.ChartUtilities; 
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
 
 public class ReadDB{
 
@@ -27,16 +33,24 @@ public class ReadDB{
      try{
       stmt = connection.createStatement();
       String query = "SELECT * FROM spt";
-
       ResultSet resSet = stmt.executeQuery(query);
 
+        
+      Hashtable<String,Hashtable> records = new Hashtable<String,Hashtable>();
+      
       while (resSet.next()) {
-        System.out.println(resSet.getString(1) + ", " + resSet.getString(2) + ", "
-             + resSet.getString(3)+ ", " + resSet.getString(4));
+        Hashtable<String,String> record = new Hashtable<String,String>();
+        record.put("Hs",resSet.getString(2));
+        record.put("Tz",resSet.getString(3));
+        record.put("Battery",resSet.getString(4));
+        records.put(resSet.getString(1), record);
+          
+        System.out.println(records);
       }
      } catch (SQLException e) {
        System.out.println(e.toString());
      }
+
      
  }
  }
